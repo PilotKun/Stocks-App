@@ -7,7 +7,9 @@ import SelectField from "@/components/forms/SelectField";
 import {INVESTMENT_GOALS, PREFERRED_INDUSTRIES, RISK_TOLERANCE_OPTIONS} from "@/lib/constants";
 import {CountrySelectField} from "@/components/forms/CountrySelectField";
 import FooterLink from "@/components/forms/FooterLink";
+import {signUpWithEmail} from "@/lib/actions/auth.actions";
 import {useRouter} from "next/navigation";
+import {toast} from "sonner";
 
 const SignUp = () => {
     const router = useRouter()
@@ -29,12 +31,15 @@ const SignUp = () => {
         mode: 'onBlur'
     }, );
 
-    const onSubmit = async (_data: SignUpFormData) => {
+    const onSubmit = async (data: SignUpFormData) => {
         try {
-            // Replace with real sign-up action when available
-            router.push('/');
+            const result = await signUpWithEmail(data);
+            if(result.success) router.push('/');
         } catch (e) {
-            console.error('Sign up failed', e);
+            console.error(e);
+            toast.error('Sign up failed', {
+                description: e instanceof Error ? e.message : 'Failed to create an account.'
+            })
         }
     }
 
@@ -46,7 +51,7 @@ const SignUp = () => {
                 <InputField
                     name="fullName"
                     label="Full Name"
-                    placeholder="Waren B."
+                    placeholder="John Doe"
                     register={register}
                     error={errors.fullName}
                     validation={{ required: 'Full name is required', minLength: 2 }}
@@ -55,7 +60,7 @@ const SignUp = () => {
                 <InputField
                     name="email"
                     label="Email"
-                    placeholder="example@gmail.com"
+                    placeholder="contact@jsmastery.com"
                     register={register}
                     error={errors.email}
                     validation={{ required: 'Email name is required', pattern: /^\w+@\w+\.\w+$/, message: 'Email address is required' }}
@@ -118,4 +123,4 @@ const SignUp = () => {
         </>
     )
 }
-export default SignUp; 
+export default SignUp;
