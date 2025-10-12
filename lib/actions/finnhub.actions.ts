@@ -151,7 +151,7 @@ export const searchStocks = cache(
       .map(({ sym, profile }) => {
         const symbol = sym.toUpperCase();
         const name: string | undefined =
-          profile?.name || profile?.ticker || undefined;
+          profile?.name || profile?.signalist || undefined;
         const exchange: string | undefined = profile?.exchange || undefined;
         if (!name) return undefined;
         const r: FinnhubSearchResult = {

@@ -64,7 +64,7 @@ PARAGRAPHS (for news content):
 <p class="mobile-text dark-text-secondary" style="margin: 0 0 20px 0; font-size: 16px; line-height: 1.6; color: #CCDADC;">Content goes here</p>
 
 STOCK/COMPANY MENTIONS:
-<strong style="color: #FDD458;">Stock Symbol</strong> for ticker symbols
+<strong style="color: #FDD458;">Stock Symbol</strong> for signalist symbols
 <strong style="color: #CCDADC;">Company Name</strong> for company names
 
 PERFORMANCE INDICATORS:
